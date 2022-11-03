@@ -99,7 +99,11 @@ button {
 }
 
 .view {
-  width: 90%;
+  width: 70%;
+}
+
+#remove-btn{
+  padding: 2px;
 }
 
 #clear-btn {
