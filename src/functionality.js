@@ -27,13 +27,15 @@ class Tasks {
 // This function gets call and insert the new task into the HTML
 const fillList = (newTask) => {
   const content = `<li>
-  <button class="${newTask.completed}"> 
-  <i class="fa-regular fa-square"></i>
-  </button>
-  <div class="view">
-  <input type="text" class="description-input" value="${newTask.description}" readonly="">
-  </div>
-  <button class="edit" id="${newTask.description}"> edit</button>
+  <input 
+   type="checkbox"
+    id="${newTask.description}"
+    />
+    <label class="label" for="${newTask.description}">
+    <span class="custom-checkbox"></span>
+    <input type="text" class="description-input" value="${newTask.description}" readonly="">
+    </label>
+  <button class="edit" id="1${newTask.description}"> edit</button>
   <button class="remove"> remove</button>
   </li>`;
   body.insertAdjacentHTML('beforeend', content);
@@ -72,7 +74,7 @@ body.addEventListener('click', (e) => {
   }
   // task will be edited when first the input field of task is updated and then edit icon is clicked
   if (e.target.classList.contains('edit')) {
-    const input = task.querySelector('input');
+    const input = task.querySelector('.description-input');
     input.removeAttribute('readonly');
     input.focus();
     input.addEventListener('blur', (e) => {
