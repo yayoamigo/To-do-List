@@ -45,11 +45,15 @@ const fillList = (newTask) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskInput = document.getElementById('new-task-input');
+  if(taskInput.value === '' || taskInput.value === null ){
+    return
+  } else {
   const newTask = new Tasks(taskInput.value);
   fillList(newTask);
   Tasks.taskPush(newTask);
   localStorage.setItem('taskArray', JSON.stringify(Tasks.taskObj));
   taskInput.value = '';
+  }
 });
 
 // Function for emoving the task from the local storage
