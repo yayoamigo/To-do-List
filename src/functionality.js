@@ -1,7 +1,9 @@
 import './styles.css';
+import updateTaskArray from './modules.js';
 
 const body = document.getElementById('item-list');
 const form = document.getElementById('new-task-form');
+const clearBtn = document.getElementById('clear-btn');
 
 // First we need a task class to create the array for our new tasks and the methods to add and
 // remove those tasks to and from the
@@ -27,16 +29,13 @@ class Tasks {
 // This function gets call and insert the new task into the HTML
 const fillList = (newTask) => {
   const content = `<li>
-  <input 
-   type="checkbox"
-    id="${newTask.description}"
-    />
+    <input type="checkbox" class="checkbox"  id="${newTask.description}">
     <label class="label" for="${newTask.description}">
     <span class="custom-checkbox"></span>
     <input type="text" class="description-input" value="${newTask.description}" readonly="">
     </label>
-  <button class="edit" id="1${newTask.description}"> edit</button>
-  <button class="remove"> remove</button>
+  <i class="fa-solid fa-pen-to-square edit" id="1${newTask.description}"></i>
+  <i class="fa-solid fa-trash-can remove"></i>
   </li>`;
   body.insertAdjacentHTML('beforeend', content);
 };
@@ -46,6 +45,9 @@ const fillList = (newTask) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskInput = document.getElementById('new-task-input');
+  if (taskInput.value === '' || taskInput.value === null) {
+    console.log('empty');
+  }
   const newTask = new Tasks(taskInput.value);
   fillList(newTask);
   Tasks.taskPush(newTask);
@@ -85,12 +87,33 @@ body.addEventListener('click', (e) => {
       localStorage.setItem('taskArray', JSON.stringify(x));
     });
   }
+  // When the user clicks on the checkbox the obj updates to checked
+  if (e.target.classList.contains('checkbox')) {
+    const tasks = JSON.parse(localStorage.getItem('taskArray'));
+    updateTaskArray(e.target, tasks);
+  }
+});
+
+// Function for clearing all the completed tasks
+clearBtn.addEventListener('click', () => {
+  const tasks = JSON.parse(localStorage.getItem('taskArray'));
+  const filterTasks = tasks.filter((task) => !task.completed);
+  localStorage.setItem('taskArray', JSON.stringify(filterTasks));
+  window.location.reload();
 });
 
 // Function for displaying the taks from the local storage
 const displayTasks = () => {
   const tasks = JSON.parse(localStorage.getItem('taskArray'));
   tasks.forEach((x) => fillList(x));
+  const completedTasksIndex = tasks.filter((task) => task.completed === true);
+  for (let i = 0; i < completedTasksIndex.length; i += 1) {
+    for (let j = 0; j < (body.children).length; j += 1) {
+      if (j === (completedTasksIndex[i].index - 1)) {
+        body.children[j].children[0].checked = true;
+      }
+    }
+  }
 };
 
 window.addEventListener('DOMContentLoaded', displayTasks);
