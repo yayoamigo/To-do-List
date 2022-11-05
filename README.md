@@ -51,7 +51,9 @@ $ npm install
 
 This app is deployed in the GitHub Pages for easy viewing upon merged on the main branch.
 Please find the link in the Live Demo section.
+## Live Demo 🔗
 
+Check the live demo [here](https://yayoamigo.github.io/To-do-List/dist/index.html)👈
 
 ## Authors
 
