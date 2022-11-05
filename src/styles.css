@@ -32,7 +32,11 @@ input {
   background-color: white;
 }
 
-.button {
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
+button {
   background: none;
   color: inherit;
   border: none;
@@ -44,9 +48,11 @@ input {
 
 #hero {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: flex-start;
   height: 100vh;
+  background-image: url(/src/cathryn-lavery-fMD_Cru6OTk-unsplash.jpg);
+  background-size: cover;
 }
 
 #title {
@@ -57,9 +63,12 @@ input {
 
 #divBody {
   width: 30%;
-  border: 1px solid black;
+  margin-top: 1%;
+  margin-left: 1%;
+  border: 2px solid black;
   display: flex;
   flex-direction: column;
+  background-color: white
 }
 
 #titleDiv {
@@ -165,7 +174,6 @@ input {
   margin-right: var(--size);
   cursor: pointer;
   border: 2px solid currentColor;
-  border-radius: 50%;
   -webkit-transform: scale(1);
   transform: scale(1);
   transition: -webkit-transform 300ms ease-in-out;

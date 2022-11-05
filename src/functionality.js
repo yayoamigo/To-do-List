@@ -34,8 +34,8 @@ const fillList = (newTask) => {
     <span class="custom-checkbox"></span>
     <input type="text" class="description-input" value="${newTask.description}" readonly="">
     </label>
-  <button class="edit" id="1${newTask.description}"> edit</button>
-  <button class="remove"> remove</button>
+  <i class="fa-solid fa-pen-to-square edit" id="1${newTask.description}"></i>
+  <i class="fa-solid fa-trash-can remove"></i>
   </li>`;
   body.insertAdjacentHTML('beforeend', content);
 };
