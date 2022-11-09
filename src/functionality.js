@@ -1,44 +1,10 @@
 import './styles.css';
 import updateTaskArray from './modules.js';
+import { removeTasks, Tasks, fillList } from './addRemove.js';
 
 const body = document.getElementById('item-list');
 const form = document.getElementById('new-task-form');
 const clearBtn = document.getElementById('clear-btn');
-
-// First we need a task class to create the array for our new tasks and the methods to add and
-// remove those tasks to and from the
-// local storage
-class Tasks {
-  static taskObj = [];
-
-  constructor(description) {
-    this.description = description;
-    this.completed = false;
-    this.index = Tasks.taskObj.length + 1;
-  }
-
-  static taskPush(newTask) {
-    Tasks.taskObj.push(newTask);
-  }
-
-  static removeTask(element) {
-    element.parentElement.remove();
-  }
-}
-
-// This function gets call and insert the new task into the HTML
-const fillList = (newTask) => {
-  const content = `<li>
-    <input type="checkbox" class="checkbox"  id="${newTask.description}">
-    <label class="label" for="${newTask.description}">
-    <span class="custom-checkbox"></span>
-    <input type="text" class="description-input" value="${newTask.description}" readonly="">
-    </label>
-  <i class="fa-solid fa-pen-to-square edit" id="1${newTask.description}"></i>
-  <i class="fa-solid fa-trash-can remove"></i>
-  </li>`;
-  body.insertAdjacentHTML('beforeend', content);
-};
 
 // When the user submits a new task we create a new instance of the task obj, and call the methods
 // to add that task to local storage
@@ -46,7 +12,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskInput = document.getElementById('new-task-input');
   if (taskInput.value === '' || taskInput.value === null) {
-    console.log('empty');
+    return;
   }
   const newTask = new Tasks(taskInput.value);
   fillList(newTask);
@@ -54,18 +20,6 @@ form.addEventListener('submit', (e) => {
   localStorage.setItem('taskArray', JSON.stringify(Tasks.taskObj));
   taskInput.value = '';
 });
-
-// Function for emoving the task from the local storage
-const removeTasks = (task) => {
-  const taskDesc = task.querySelector('input').value;
-  const x = JSON.parse(localStorage.getItem('taskArray'));
-  const filterIndex = x.findIndex((x) => x.description === taskDesc);
-  x.splice(filterIndex, 1);
-  x.forEach((item, index) => {
-    item.index = index + 1;
-  });
-  localStorage.setItem('taskArray', JSON.stringify(x));
-};
 
 body.addEventListener('click', (e) => {
   const task = e.target.parentElement;
