@@ -1,4 +1,3 @@
-// Function for emoving the task from the local storage
 export const removeTasks = (task) => {
   const taskDesc = task.querySelector('input').value;
   const x = JSON.parse(localStorage.getItem('taskArray'));

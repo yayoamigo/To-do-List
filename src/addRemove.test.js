@@ -1,7 +1,6 @@
+import { Tasks, removeTasks, fillList } from './addRemove.js';
 
-import { Tasks, removeTasks, fillList } from './addRemove';
-
-const localStorageMock = (function () {
+const localStorageMock = (function Local() {
   let store = {};
   return {
     getItem(key) {
