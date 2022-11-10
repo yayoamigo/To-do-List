@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/yayoamigo/To-do-List#readme",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.19.6",

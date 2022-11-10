@@ -122,6 +122,7 @@ button {
   padding-left: 10px;
   padding-right: 10px;
   height: 60px;
+  cursor: move;
 }
 
 #clear-btn {
@@ -222,4 +223,14 @@ button {
   transform: scaleX(1);
   -webkit-transform-origin: left;
   transform-origin: left;
+}
+
+/* Drag and drop classes  */
+
+.selected {
+  transform: scale(1.02) rotate(-1deg)
+}
+
+.drag {
+  opacity: 0;
 }

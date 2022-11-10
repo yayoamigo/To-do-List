@@ -33,7 +33,7 @@ export class Tasks {
 // This function gets call and insert the new task into the HTML
 export const fillList = (newTask) => {
   const body = document.getElementById('item-list');
-  const content = `<li>
+  const content = `<li data-id="${newTask.index}">
     <input type="checkbox" class="checkbox"  id="${newTask.description}">
     <label class="label" for="${newTask.description}">
     <span class="custom-checkbox"></span>
