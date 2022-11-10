@@ -228,7 +228,7 @@ button {
 /* Drag and drop classes  */
 
 .selected {
-  transform: scale(1.02) rotate(-1deg)
+  transform: scale(1.02) rotate(-1deg);
 }
 
 .drag {

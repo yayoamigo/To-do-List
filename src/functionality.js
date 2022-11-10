@@ -1,23 +1,19 @@
 import './styles.css';
+import Sortable from 'sortablejs';
 import updateTaskArray from './modules.js';
 import { removeTasks, Tasks, fillList } from './addRemove.js';
-import Sortable from 'sortablejs';
 
 const body = document.getElementById('item-list');
 const form = document.getElementById('new-task-form');
 const clearBtn = document.getElementById('clear-btn');
 
-
-
-
-//Sortable library for drag and drop 
+// Sortable library for drag and drop
 Sortable.create(body, {
   animation: 150,
-  chosenClass: "selected",
-  dragClass: "drag",
+  chosenClass: 'selected',
+  dragClass: 'drag',
   onEnd: () => {
-    
-    
+
   },
   group: 'taskArray2',
   store: {
@@ -25,17 +21,18 @@ Sortable.create(body, {
       const order = sortable.toArray();
       const x = JSON.parse(localStorage.getItem('taskArray'));
       const tempArr = [];
-      order.forEach((item)=> {
-        const newOrder = x.find((obj) => obj.index == item);
+
+      order.forEach((item) => {
+        const newOrder = x.find((obj) => obj.index === parseInt(item, 10));
         tempArr.push(newOrder);
-      })
+      });
       tempArr.forEach((item, index) => {
         item.index = index + 1;
       });
-  localStorage.setItem('taskArray', JSON.stringify(tempArr));
+      localStorage.setItem('taskArray', JSON.stringify(tempArr));
+    },
+
   },
-  
-  }
 });
 
 // When the user submits a new task we create a new instance of the task obj, and call the methods
